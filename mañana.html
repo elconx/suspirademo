@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal - Info</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: rgb(255, 255, 255);
+      color: white;
+      font-family: "Courier New", Courier, monospace;
+    }
+    /* Cabecera con logo y botones */
+    .header {
+      position: relative;
+      height: 80px;
+      background: rgb(255, 255, 255);
+      border-bottom: 1px solid rgba(255, 255, 255, 0);
+      z-index: 10; /* Por encima del video */
+    }
+    /* Logo a la izquierda, más pequeño */
+    .logo {
+      position: absolute;
+      right: 30px;
+      top: 40px;
+      transform: translateY(-50%);
+      width: 80px;
+    }
+    /* Botones de navegación centrados */
+    .nav-buttons {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .nav-buttons a {
+      display: inline-block;
+      margin: 0;
+      padding: 10px 20px;
+      background-color: transparent;
+      border: 1px solid rgba(0, 0, 0, 0);
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      font-family: "Avenir", sans-serif;
+    }
+    .nav-buttons a:hover {
+      background-color: rgba(0, 0, 0, 0.425);
+    }
+    /* Botón activo: se subraya */
+    .nav-buttons a.active {
+      text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html">
+      <img src="vid/2.png" alt="Logo" class="logo">
+    </a>
+    <div class="nav-buttons">
+      <a href="info.html">((info))</a>
+      <a href="ayer.html">((ayer))</a>
+      <a href="mañana.html" class="active">((mañana))</a>
+      <a href="todo.html">((todo))</a>
+      <a href="hoy.html">((hoy))</a>
+      <a href="se-parte.html">((sé parte))</a>
+    </div>
+  </div>
+  </script>
+</body>
+</html>

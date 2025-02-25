@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Ayer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4c2c2;
+            text-align: center;
+        }
+        .container {
+            width:60%;
+            margin: auto;
+            padding: 60px;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid black;
+        }
+        button {
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Ejemplo de estilos para cuando se muestre el contenido del modal en otra parte */
+        .modal-content p {
+            font-family: "Courier New", Courier, monospace;
+            margin: 10px 0;
+        }
+        .modal-content a.superlink {
+            font-weight: bold;
+            color: #d00;
+            text-decoration: none;
+        }
+        .modal-content a.superlink:hover {
+            text-decoration: underline;
+        }
+        .modal-content a.button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: rgba(0, 123, 255, 0.7);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .modal-content a.button:hover {
+            background-color: rgba(0, 86, 179, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Acceso Restringido</h2>
+        <input type="password" id="password" placeholder="Ingrese contraseña">
+        <button onclick="checkPassword()">Entrar</button>
+    </div>
+    
+    <div class="container hidden" id="admin-container">
+        <h2>Administrar Entradas</h2>
+        <input type="text" id="fecha" placeholder="Fecha (Ej: 12.02.2025)">
+        <input type="text" id="numero" placeholder="Número de Modal (Ej: 001)">
+        <input type="text" id="titulo" placeholder="Título">
+        <textarea id="contenido" placeholder="Contenido del modal (usa saltos de línea para separar párrafos, puedes incluir HTML para superlinks)"></textarea>
+        <input type="text" id="botonTexto" placeholder="Texto del botón (opcional)">
+        <input type="text" id="botonEnlace" placeholder="Enlace externo del botón (opcional)">
+        <button onclick="addModal()">Agregar Modal</button>
+        <h3>Modales existentes</h3>
+        <ul id="modal-list"></ul>
+    </div>
+
+    <script>
+        const correctPassword = "suspiraeslomas"; // Cambiar por una contraseña más segura
+
+        function checkPassword() {
+            const inputPass = document.getElementById("password").value;
+            if (inputPass === correctPassword) {
+                document.getElementById("login-container").classList.add("hidden");
+                document.getElementById("admin-container").classList.remove("hidden");
+                loadModals();
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        }
+
+        function addModal() {
+            const fecha = document.getElementById("fecha").value;
+            const numero = document.getElementById("numero").value;
+            const titulo = document.getElementById("titulo").value;
+            let contenido = document.getElementById("contenido").value;
+            const botonTexto = document.getElementById("botonTexto").value;
+            const botonEnlace = document.getElementById("botonEnlace").value;
+            
+            // Convertir saltos de línea en párrafos si no se han agregado etiquetas HTML
+            if (!contenido.includes("<p>")) {
+                const parrafos = contenido.split("\n").filter(line => line.trim() !== "");
+                contenido = parrafos.map(line => `<p>${line}</p>`).join("");
+            }
+            
+            if (fecha && numero && titulo && contenido) {
+                const modals = JSON.parse(localStorage.getItem("modals")) || [];
+                modals.push({ fecha, numero, titulo, contenido, botonTexto, botonEnlace });
+                localStorage.setItem("modals", JSON.stringify(modals));
+                loadModals();
+            } else {
+                alert("Todos los campos obligatorios deben ser completados");
+            }
+        }
+
+        function loadModals() {
+            const modalList = document.getElementById("modal-list");
+            modalList.innerHTML = "";
+            const modals = JSON.parse(localStorage.getItem("modals")) || [];
+            
+            modals.forEach((modal, index) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <p style="font-size: 15px;">${modal.fecha}</p>
+                    <p style="font-size: 24px; font-weight: bold;">${modal.numero}</p>
+                    <p style="font-size: 16px;">${modal.titulo}</p>
+                    <button onclick="removeModal(${index})">Eliminar</button>
+                `;
+                modalList.appendChild(listItem);
+            });
+        }
+
+        function removeModal(index) {
+            let modals = JSON.parse(localStorage.getItem("modals")) || [];
+            modals.splice(index, 1);
+            localStorage.setItem("modals", JSON.stringify(modals));
+            loadModals();
+        }
+
+        window.onload = loadModals;
+    </script>
+</body>
+</html>

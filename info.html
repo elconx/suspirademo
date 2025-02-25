@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal - Info</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: rgb(255, 255, 255);
+      color: white;
+      font-family: "Courier New", Courier, monospace;
+    }
+    
+    /* Animación de Fade-in */
+    .fade-in {
+      opacity: 0;
+      animation: fadeInAnimation 1.5s ease-in-out forwards;
+    }
+
+    @keyframes fadeInAnimation {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Cabecera con logo y botones */
+    .header {
+      position: relative;
+      height: 80px;
+      background: rgb(255, 255, 255);
+      border-bottom: 1px solid rgba(255, 255, 255, 0);
+      z-index: 10; /* Por encima del video */
+      animation-delay: 0.5s;
+    }
+    /* Logo a la izquierda, más pequeño */
+    .logo {
+      position: absolute;
+      right: 30px;
+      top: 40px;
+      transform: translateY(-50%);
+      width: 80px;
+    }
+    /* Botones de navegación centrados */
+    .nav-buttons {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .nav-buttons a {
+      display: inline-block;
+      margin: 0;
+      padding: 10px 20px;
+      background-color: transparent;
+      border: 1px solid rgba(0, 0, 0, 0);
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      font-family: "Avenir", sans-serif;
+    }
+    .nav-buttons a:hover {
+      background-color: rgba(0, 0, 0, 0.425);
+    }
+    /* Botón activo: se subraya */
+    .nav-buttons a.active {
+      text-decoration: underline;
+    }
+    /* Área de contenido */
+    .content {
+      position: relative;
+      right: 270px;
+      margin: 40px auto 40px auto;
+      max-width: 800px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.545);
+      border-radius: 10px;
+      z-index: 10; /* Por encima del video */
+    }
+    #video-container {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0; /* Detrás de la cabecera y contenido */
+      transform: translate(-50%, -50%);
+    }
+    #bg-video {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: invert(1); /* Empieza sin invertir */
+      animation: fadeInAnimation 2s ease-in-out forwards;
+      /*animation: invertColors 10s forwards; /* Animación para invertir los colores */
+    }
+
+    /* Animación para invertir colores */
+    @keyframes invertColors {
+      0% {
+        filter: invert(0); /* Colores normales al inicio */
+      }
+      100% {
+        filter: invert(1); /* Colores invertidos al final */
+      }
+    }
+
+    /* Modal pequeño con texto estático en posiciones aleatorias */
+    .small-modal {
+      position: absolute;
+      font-size: 15px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: rgb(255, 255, 255);
+      padding: 5px 10px;
+      border-radius: 5px;
+      z-index: 100;
+      cursor: pointer;
+      transition: top 10s, left 10s; /* Añadimos animación */
+      animation: fadeInAnimation 1.5s ease-in-out forwards;
+    }
+
+    /* Modal grande con imagen centrada */
+    .large-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40%; /* Modal más grande */
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.927);
+      color: rgb(255, 255, 255);
+      border-radius: 10px;
+      z-index: 200;
+    }
+
+    /* Fondo opaco para el overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad */
+      z-index: 150; /* Debajo del modal grande pero por encima del contenido */
+      display: none;
+    }
+
+    /* Modal con texto que aparece después del click */
+    .text-modal {
+      display: none; /* Inicialmente oculto */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.831);
+      color: rgb(255, 255, 255);
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 300;
+      font-size: 16px;
+    }
+
+    /* Logo en el centro */
+    .center-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 100px;
+      background-image: url('vid/1.png'); /* Aquí puedes poner la ruta de tu logo */
+      background-size: 60%;
+      background-position: center;
+      cursor: pointer;
+      animation: fadeInAnimation 3s ease-in-out forwards;
+      z-index: 200; /* Asegurarse de que esté sobre el contenido */
+      /*filter: invert(0); /* Empieza sin invertir */
+      /*animation: invertColorsLogo 10s forwards; /* Animación para invertir los colores del logo */
+    }
+
+    /* Animación para invertir colores del logo */
+    @keyframes invertColorsLogo {
+      0% {
+        filter: invert(0); /* Colores normales al inicio */
+      }
+      100% {
+        filter: invert(1); /* Colores invertidos al final */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Video de fondo -->
+  <video id="bg-video" autoplay loop muted playsinline>
+    <source src="vid/INFO.mov" type="video/mp4">
+    Tu navegador no soporta videos HTML5.
+  </video>
+
+  <!-- Contenedor del video que seguirá al cursor -->
+  <div id="video-container">
+    <video id="bg-video" autoplay loop muted playsinline>
+      <source src="vid/SUSVIDEO.mov" type="video/mp4">
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+
+  <div class="header fade-in">
+    <a href="index.html">
+      <img src="vid/2.png" alt="Logo" class="logo">
+    </a>
+    <div class="nav-buttons">
+      <a href="info.html" class="active">((info))</a>
+      <a href="ayer.html">((ayer))</a>
+      <a href="mañana.html">((mañana))</a>
+      <a href="todo.html">((todo))</a>
+      <a href="hoy.html">((hoy))</a>
+      <a href="se-parte.html">((sé parte))</a>
+    </div>
+  </div>
+
+  <!-- Contenedor de los textos estáticos -->
+  <div id="smallModalContainer"></div>
+
+  <!-- Logo central que abre el modal -->
+  <div class="center-logo" id="centerLogo"
+  onclick="showLargeModal('Suspira es un espectro de obras que se estructura en cuatro ejes principales: 1. Música de Estudio. 2. Instalaciones multimedia y arte sonoro. 3. Actuaciones en vivo y conciertos. 4. Archivo y Documentación. Cada eje puede constituir en una o mas obras independiente que interactua con los demas, creando una red interconectada sin temporalidad definida. La obra no tiene un inicio ni un final, sino que se suspende en un continuo. En este contexto, cada eje representa un tiempo distinto: el archivo y la documentación simbolizan el pasado, las actuaciones en vivo representa el presente, las instalaciones apuntan hacia el futuro y la música de estudio transitan entre todo el espectro del tiempo.')"></div>
+
+  <!-- Fondo opaco (overlay) -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Modal grande con texto (oculto por defecto) -->
+  <div class="large-modal" id="largeModal" style="display: none;">
+    <p id="largeModalText"></p>
+  </div>
+
+  <script>
+    // Función para mostrar el modal grande con texto
+    function showLargeModal(text) {
+      const largeModal = document.getElementById('largeModal');
+      const largeModalText = document.getElementById('largeModalText');
+      const overlay = document.getElementById('overlay');
+
+      largeModalText.innerText = text;
+      largeModal.style.display = 'block';
+      overlay.style.display = 'block'; // Mostrar el fondo opaco
+    }
+
+    // Cerrar el modal grande cuando se haga clic fuera de él
+    window.onclick = function(event) {
+      var modal = document.getElementById('largeModal');
+      var overlay = document.getElementById('overlay');
+      if (event.target == modal || event.target == overlay) {
+        modal.style.display = "none";
+        overlay.style.display = "none"; // Ocultar el fondo opaco
+      }
+    }
+
+    // Generar 7 textos con posiciones aleatorias y estáticos
+    const texts = [
+      { smallText: "((hoy))", largeText: "Texto grande 1: Detalles sobre el texto 1." },
+      { smallText: "((ayer))", largeText: "Texto grande 2: Detalles sobre el texto 2." },
+      { smallText: "((todo))", largeText: "Texto grande 3: Detalles sobre el texto 3." },
+      { smallText: "((mañana))", largeText: "Texto grande 4: Detalles sobre el texto 4." },
+      { smallText: "Historia", largeText: "Texto grande 5: Detalles sobre el texto 5." },
+      { smallText: "¿Qué es?", largeText: "Texto grande 6: Detalles sobre el texto 6." },
+      { smallText: "Dónde ver", largeText: "Texto grande 7: Detalles sobre el texto 7." }
+    ];
+
+    const smallModalContainer = document.getElementById('smallModalContainer');
+
+    // Crear los modales pequeños y asignarles posiciones aleatorias
+    texts.forEach((textObj, index) => {
+      const smallModal = document.createElement('div');
+      smallModal.classList.add('small-modal');
+      smallModal.innerText = textObj.smallText;
+
+      // Asignar una posición aleatoria inicial a cada texto
+      const topPosition = Math.random() * 80 + '%';
+      const leftPosition = Math.random() * 80 + '%';
+      smallModal.style.top = topPosition;
+      smallModal.style.left = leftPosition;
+
+      // Evento de clic para mostrar el modal grande con texto
+      smallModal.addEventListener('click', function() {
+        showLargeModal(textObj.largeText);
+      });
+
+      smallModalContainer.appendChild(smallModal);
+
+      // Función para mover los textos aleatoriamente
+      setInterval(() => {
+        const randomTop = Math.random() * 80 + '%';
+        const randomLeft = Math.random() * 80 + '%';
+        smallModal.style.top = randomTop;
+        smallModal.style.left = randomLeft;
+      }, 1000 + Math.random() * 3000); // Cambiar cada 1-4 segundos
+    });
+  </script>
+
+</body>
+</html>

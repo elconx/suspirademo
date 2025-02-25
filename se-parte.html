@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sé Parte</title>
+  <style>
+    @font-face {
+      font-family: 'Avenir';
+      src: url('avenir.woff2') format('woff2');
+    }
+    
+    body {
+      font-family: 'Avenir', sans-serif;
+      margin: 0;
+      background-color: rgb(23, 10, 30);
+      color: white;
+      text-align: left;
+      background-size: cover;
+    }
+    
+    /* Cabecera */
+    .header {
+      position: fixed;
+      width: 100%;
+      height: 80px;
+      top: 0;
+      left: 0;
+      background: rgb(255, 255, 255);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+    }
+    .logo {
+      position: absolute;
+      right: 70px;
+      top: 40px;
+      transform: translateY(-50%);
+      width: 80px;
+    }
+    .nav-buttons {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .nav-buttons a {
+      display: inline-block;
+      margin: 0;
+      padding: 10px 20px;
+      background-color: transparent;
+      border: 1px solid rgba(0, 0, 0, 0);
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      font-family: "Avenir", sans-serif;
+    }
+    .nav-buttons a:hover {
+      background-color: rgba(0, 0, 0, 0.425);
+    }
+    /* Botón activo: se subraya */
+    .nav-buttons a.active {
+      text-decoration: underline;
+    }
+    
+    /* Contenido principal */
+    .container {
+      width: 100%;
+      margin-top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    /* Título */
+    .titulo {
+      text-align: center;
+      width: 100%;
+    }
+
+    .titulo img {
+      width: 300px;
+    }
+
+    /* Texto antes de los recuadros */
+    .descripcion {
+      text-align: center;
+      position: relative;
+      bottom: 40px;
+      width: 80%;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    /* Recuadros */
+    .recuadros {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+      width: 80%;
+      height: 100px;
+      padding-left: 200px;
+    }
+    .recuadro {
+      width: 50%;
+      padding: 100px;
+      border: 2px solid white;
+      transition: background 0.3s;
+    }
+    .recuadro:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Personalización de textos en los recuadros */
+    .recuadro h2 {
+      position: relative;
+      font-size: 3em;
+      right: 130px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .recuadro h3 {
+        font-size: 3em;
+        position: relative;
+        left: 500px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    /* Posiciones individuales para cada texto en los recuadros */
+    .texto-dona {
+      position: relative;
+      left: 10px; /* Ajusta la posición del texto */
+      top: 10px;
+    }
+    .texto-colabora {
+      position: relative;
+      left: -20px; /* Ajusta la posición del texto */
+      top: 5px;
+    }
+    .texto-comparte {
+      position: relative;
+      left: 30px; /* Ajusta la posición del texto */
+      top: -5px;
+    }
+
+    /* Sección de contacto */
+    .contacto {
+      position: fixed;
+      right: 250px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: left;
+      background: rgba(28, 17, 36, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+    }
+
+    /* Imagen para el subtítulo de contacto */
+    .contacto-titulo img {
+        position: relative;
+        top: 10px;
+      width: 150px; /* Ajusta el tamaño según sea necesario */
+    }
+    #bg-image {
+      position: fixed;
+      top: 100px; /* Ajustar la posición debajo de la cabecera */
+      left: 90%;
+      transform: translateX(-50%); /* Centrar la imagen */
+      width: 90%; /* Ajusta el tamaño de la imagen */
+      height: auto;
+      z-index: -1; /* Colocar detrás de la cabecera */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabecera -->
+  <div class="header">
+    <a href="index.html">
+      <img src="vid/2.png" alt="Logo" class="logo">
+    </a>
+    <div class="nav-buttons">
+      <a href="info.html">((info))</a>
+      <a href="ayer.html">((ayer))</a>
+      <a href="mañana.html">((mañana))</a>
+      <a href="todo.html">((todo))</a>
+      <a href="hoy.html">((hoy))</a>
+      <a href="se-parte.html" class="active">((sé parte))</a>
+    </div>
+  </div>
+  <!-- Imagen de fondo -->
+  <img id="bg-image" src="vid/suspiraportada.png" alt="Suspira">
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <!-- Título como imagen -->
+    <div class="titulo">
+      <img src="vid/separtet.png" alt="Sé Parte">
+    </div>
+
+    <!-- Texto antes de los recuadros -->
+    <p class="descripcion">
+     La obra no solo se compone de muchas piezas si no de muchos artistas. Tú puedes ser uno de ellos. 
+    </p>
+
+    <!-- Recuadros -->
+    <div class="recuadros">
+      <div class="recuadro">
+        <h2>Dona</h2>
+        <p class="texto-dona">Haz tu donación directa.</p>
+      </div>
+      <div class="recuadro">
+        <h3>Colabora</h3>
+        <p class="texto-colabora">Forma parte del equipo contribuyendo con tu talento o habilidades.</p>
+      </div>
+      <div class="recuadro">
+        <h2>Crea</h2>
+        <p class="texto-comparte">Apartado especial para los creativos</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de contacto -->
+  <div class="contacto">
+    <!-- Imagen en lugar de subtítulo "Contacto" -->
+    <div class="contacto-titulo">
+      <img src="vid/contactt.png" alt="Contacto">
+    </div>
+    <p>Agustín Echeverría | Dirección<br>+34 636 545 238<br>agustinecheverriasonido@gmail.com</p>
+  </div>
+
+</body>
+</html>

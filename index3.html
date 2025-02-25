@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspira</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+        .video-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .logo {
+            width: 300px;
+            height: auto;
+            margin-bottom: -200px;
+        }
+        .links {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        .links a {
+            position: absolute;
+            font-size: 1.5em;
+            text-decoration: none;
+            color: #ccc;
+            animation: float 3s infinite ease-in-out;
+        }
+        .links a:nth-child(odd) {
+            animation-duration: 2.5s;
+        }
+        .links a:hover {
+            color: white;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        } 
+        /* Posicionamiento aleatorio de los enlaces alrededor del centro */
+        .links a:nth-child(1) { top: -5px; left: -50px; }
+        .links a:nth-child(2) { top: -5px; right: -50px; }
+        .links a:nth-child(3) { bottom: -70px; left: -30px; }
+        .links a:nth-child(4) { bottom: -70px; right: -10px; }
+        .links a:nth-child(5) { top: 70px; left: 50px; }
+        .links a:nth-child(6) { bottom: -150px; right: 50px; }
+        
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="vid/SUSVIDEO.mov" type="video/mp4">
+        </video>
+    </div>
+    <div class="container">
+        <img src="vid/1.png" alt="Suspira" class="logo">
+    <head>  
+       <div class="links">
+            <a href="se-parte.html">(sé parte)</a>
+            <a href="manana.html">(mañana)</a>
+            <a href="hoy.html">(hoy)</a>
+            <a href="ayer.html">(ayer)</a>
+            <a href="todo.html">(todo)</a>
+            <a href="info.html">(info)</a>
+        </div>
+    </head>  
+    </div>
+</body>
+</html>

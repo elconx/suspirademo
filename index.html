@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspira</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+            cursor: pointer;
+            position: relative;
+        }
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            animation: invertColors 10s forwards; /* Añadí la animación */
+        }
+        .logo {
+            position: absolute;
+            width: 300px;
+            height: auto;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body onclick="fadeOutAndRedirect()">
+    <video autoplay loop muted>
+        <source src="vid/SUSVIDEO.mov" type="video/mp4">
+        Tu navegador no soporta videos.
+    </video>
+    <img src="vid/1.png" alt="Suspira" class="logo">
+
+    <div id="fade-overlay"></div>
+
+    <script>
+        function fadeOutAndRedirect() {
+            const overlay = document.createElement("div");
+            overlay.style.position = "fixed";
+            overlay.style.top = "0";
+            overlay.style.left = "0";
+            overlay.style.width = "100%";
+            overlay.style.height = "100%";
+            overlay.style.backgroundColor = "white";  // Cambié el color a blanco
+            overlay.style.opacity = "0";
+            overlay.style.transition = "opacity 1s";
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.style.opacity = "1";
+            }, 10);
+
+            setTimeout(() => {
+                window.location.href = "info.html";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
